@@ -9,7 +9,7 @@ date: 2019-5-15 15:06
 
 
 
- [项目预览](/assets/website/BootstrapDemo1/index.html) 
+ [项目预览](/website/bootstrapDemo1/index.html) 
 
 ### 所运用到Bootstrap的知识点
 
