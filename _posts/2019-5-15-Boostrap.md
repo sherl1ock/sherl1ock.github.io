@@ -202,11 +202,47 @@ js:
 <button type="button" class="btn btn-link">（链接）Link</button>
 ```
 
+
+
 ## 9.选项卡(标签页)
 
+![](/blogimg/Bootstrap/pc12.png)
 
+```html
+<div>
+    
+  <!-- 导航条 -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+  </ul>
 
+  <!-- 导航内容 -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">...</div>
+    <div role="tabpanel" class="tab-pane" id="profile">...</div>
+    <div role="tabpanel" class="tab-pane" id="messages">...</div>
+    <div role="tabpanel" class="tab-pane" id="settings">...</div>
+  </div>
 
+</div>
+```
+
+导航条的`aria-controls`属性与导航内容的`id`相匹配
+
+如果想要淡入淡出的效果只需要在导航内容添加类名`.fade`，默认激活的为`.fade in`
+
+```html
+<!-- 导航内容 -->
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="home">...</div>
+  <div role="tabpanel" class="tab-pane fade" id="profile">...</div>
+  <div role="tabpanel" class="tab-pane fade" id="messages">...</div>
+  <div role="tabpanel" class="tab-pane fade" id="settings">...</div>
+</div>
+```
 
 ## 8.徽章
 
@@ -229,4 +265,198 @@ js:
 ```html
 <div class="badge" style="padding:15px;">已更新3000+视频 | 100000+人订阅</div>
 ```
+
+## 9.导航条
+
+![](/blogimg/Bootstrap/pc13.png)
+
+![](/blogimg/Bootstrap/pc14.png)
+
+```html
+<nav class="navbar navbar-default navbar-static-top navbar-cg">
+	<div class="container">
+		<!-- 中小屏幕下的下拉列表 -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+				data-target="#cg1"	ria-expanded="false">
+              	<span class="sr-only">Toggle navigation</span>
+              	<span class="icon-bar"></span>
+              	<span class="icon-bar"></span>
+              	<span class="icon-bar"></span>
+              </button>
+			<a class="navbar-brand" href="#">
+				<img src="imgs/lk_logo_sm.png" alt="" width="180">
+			</a>
+		</div>
+
+		<!-- 导航条的内容-->
+		<div class="collapse navbar-collapse" id="cg1">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">关于我们 </a></li>
+				<li><a href="#">课程介绍</a></li>
+				<li><a href="#">热门课程</a></li>
+				<li><a href="#">名师授课</a></li>
+				<li><a href="#">课堂互动</a></li>
+				<li><a href="#">联系我们</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right hidden-sm">
+				<li><a href="#">个人中心</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+```
+
+**固定在顶部**
+
+添加 `.navbar-fixed-top` 类可以让导航条固定在顶部
+
+> **需要为 `body` 元素设置内补（padding）**
+>
+> 这个固定的导航条会遮住页面上的其它内容，除非你给 `<body>` 元素底部设置了 `padding`。用你自己的值，或用下面给出的代码都可以。提示：导航条的默认高度是 50px。
+
+```html
+body { padding-top: 70px; }
+```
+
+**固定在底部**
+
+添加 `.navbar-fixed-bottom` 类可以让导航条固定在底部
+
+**静止在顶部**
+
+通过添加 `.navbar-static-top` 类即可创建一个与页面等宽度的导航条，它会随着页面向下滚动而消失。
+
+**反色的导航条**
+
+通过添加 `.navbar-inverse` 类可以改变导航条的外观。
+
+## 10.媒体
+
+![](/blogimg/Bootstrap/pc15.png)
+
+```html
+<ul class="media-list">
+  <li class="media">
+    <div class="media-left">
+      <a href="#">
+        <img class="media-object" src="..." alt="...">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">Media heading</h4>
+      ...
+    </div>
+    <div class="media-right">
+      <h4 class="media-heading">Media heading</h4>
+      ...
+    </div>
+  </li>
+</ul>
+```
+
+`.pull-left` 和 `.pull-right` 这两个类以前也曾经被用在了媒体组件上，但是，从 v3.3.0 版本开始，他们就不再被建议使用了。`.media-left` 和 `.media-right` 替代了他们，不同之处是，在 html 结构中， `.media-right` 应当放在 `.media-body` 的后面。
+
+装载图片盒子的可选参数`media-top` 、`media-middla`、`media-bottom`让其与右边的文字上、中、下对齐
+
+```html
+<ul class="media-list">
+  <li class="media">
+    <div class="media-left media-middle">
+      <a href="#">
+        <img class="media-object" src="..." alt="...">
+      </a>
+    </div>
+    <div class="media-body">
+		...
+    </div>
+  </li>
+</ul>
+```
+
+## 11.提示框
+
+在标签上添加`data-toggle="tooltip" data-placement="显示的方向" title="显示的内容"`
+
+![](/blogimg/Bootstrap/pc16.png)
+
+```html
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+```
+
+**要在js中引用**
+
+```js
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+```
+
+
+
+## 12.自定义样式按钮
+
+**[链接](http://blog.koalite.com/bbg/)**
+
+## 13.路径导航
+
+![](/blogimg/Bootstrap/pc20.png)
+
+```html
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Library</a></li>
+  <li class="active">Data</li>
+</ol>
+```
+
+## 14. 快速浮动
+
+通过添加一个类，可以将任意元素向左或向右浮动。`!important` 被用来明确 CSS 样式的优先级。
+
+>**不能用于导航条组件中**
+>
+>排列导航条中的组件时可以使用这些工具类：`.navbar-left` 或 `.navbar-right` 。 [参见导航条文档](https://v3.bootcss.com/components/#navbar-component-alignment)以获取更多信息。
+
+### 踩到过的坑
+
+## 1.高度设死导致内容溢出
+
+正常：
+
+![](/blogimg/Bootstrap/pc18.png)
+
+样式崩塌：
+
+![](/blogimg/Bootstrap/pc17.png)
+
+原因：将包裹导航条的div`设死了高度`导致缩小到小设备屏幕的宽度时弹出的列表溢出显示导致样式崩塌
+
+## to be continued
+
+### 收获到的知识点
+
+## 1.让内容垂直绝对居中
+
+```css
+.parent{
+	display: flex;
+    flex-direction: column; //垂直排布
+    justify-content: center; //主轴居中
+    align-items: center; //交叉轴居中
+}
+//子元素无需设置
+```
+
+## 2.更深刻的理解vertical-align
+
+`vertical-middle`:把此元素放置在`父元素`的中部。
+
+![](/blogimg/Bootstrap/pc19.png)
 
