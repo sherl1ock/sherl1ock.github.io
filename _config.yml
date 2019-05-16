@@ -117,9 +117,15 @@ links:
 
 #### Comment 评论
 duoshuo_shortname:    ## e.g. wuchong      your duoshuo short name.       website: http://duoshuo.com
-disqus_shortname:     ## e.g. wuchong      your disqus short name.        website: http://disqus.com
+disqus_shortname:      ## e.g. wuchong      your disqus short name.        website: http://disqus.com
 hypercomments_id:     ## e.g. 91510        your hypercomments widget id.  website: http://hypercomments.com
 yungentie_productkey: ## your netease yungentie product key.              website: https://gentie.163.com
+# gitalk:
+#   clientID: '0694b07596fd4d64a889'
+#   clientSecret: '55a6408d1902b89827365d5a56a528e9de4c19bc'
+#   repo: 'sherl1ock.github.io'
+#   owner: 'sherl1ock'
+#   admin: ['Mr Huang']
 ## set only one of them
 ## duoshuo will be shutting down on June 1, 2017
 

@@ -1,6 +1,7 @@
 {% if page.layout == 'post' or page.layout == 'photo' %}
 {% include _partial/head.html %}
 
+<!-- 博客页面 -->
 <body>
 
   <header>
@@ -12,22 +13,7 @@
     {% assign table = true %}
     {% include _partial/sidebar.html %}
   </div>
-  <div id="gitmentContainer">
-      <h1>无情铁手1</h1>
-    </div>
-  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-  <script>
-    var gitment = new Gitment({
-      owner: sherl1ock,
-      repo: 'https://github.com/sherl1ock/sherl1ock.github.io',
-      oauth: {
-        client_id: '0694b07596fd4d64a889',
-        client_secret: '55a6408d1902b89827365d5a56a528e9de4c19bc',
-      },
-    });
-    gitment.render('gitmentContainer');
-  </script>
+  {% include /gitalk.html %}
   <footer>{% include _partial/footer.html %}</footer>
   {% include _partial/after_footer.html %}
 </body>
@@ -36,6 +22,7 @@
 {% elsif page.layout == 'page' %}
 {% include _partial/head.html %}
 
+<!-- Abort页面 -->
 <body>
   <header>
     {% include _partial/header.html %}
@@ -43,10 +30,10 @@
   <div id="container">
     {{ content }}
   </div>
+
   <footer>{% include _partial/footer.html %}</footer>
   {% include _partial/after_footer.html %}
 </body>
-
 </html>
 {% elsif page.layout == 'search' %}
 {% include _partial/head.html %}
@@ -66,6 +53,7 @@
 {% elsif page.layout == 'categories' or page.layout == 'tags' or page.layout == 'archives' %}
 {% include _partial/head.html %}
 
+<!-- Archives页面 -->
 <body>
   <header>
     {% include _partial/header.html %}
@@ -76,11 +64,11 @@
   <footer>{% include _partial/footer.html %}</footer>
   {% include _partial/after_footer.html %}
 </body>
-
 </html>
 {% else %}
 {% include _partial/head.html %}
 
+<!-- 主页面 -->
 <body>
   <header>
     {% include _partial/header.html %}
