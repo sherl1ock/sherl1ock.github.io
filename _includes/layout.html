@@ -1,86 +1,88 @@
 {% if page.layout == 'post' or page.layout == 'photo' %}
 {% include _partial/head.html %}
-
 <!-- 博客页面 -->
-<body>
 
-  <header>
-    {% include _partial/header.html %}
-  </header>
-  <div id="container">
-    {{ content }}
-    {% assign item = page %}
-    {% assign table = true %}
-    {% include _partial/sidebar.html %}
-  </div>
-  {% include /gitalk.html %}
-  <footer>{% include _partial/footer.html %}</footer>
-  {% include _partial/after_footer.html %}
+<body>
+    <header>
+        {% include _partial/header.html %}
+    </header>
+    <div id="container">
+        {{ content }}
+        {% assign item = page %}
+        {% assign table = true %}
+        {% include _partial/sidebar.html %}
+    </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    {% include /gitalk.html %}
+    <footer>{% include _partial/footer.html %}</footer>
+    {% include _partial/after_footer.html %}
 </body>
 
 </html>
 {% elsif page.layout == 'page' %}
 {% include _partial/head.html %}
-
 <!-- Abort页面 -->
-<body>
-  <header>
-    {% include _partial/header.html %}
-  </header>
-  <div id="container">
-    {{ content }}
-  </div>
 
-  <footer>{% include _partial/footer.html %}</footer>
-  {% include _partial/after_footer.html %}
+<body>
+    <header>
+        {% include _partial/header.html %}
+    </header>
+    <div id="container">
+        {{ content }}
+    </div>
+    <footer>{% include _partial/footer.html %}</footer>
+    {% include _partial/after_footer.html %}
 </body>
+
 </html>
 {% elsif page.layout == 'search' %}
 {% include _partial/head.html %}
 
 <body>
-  <header>
-    {% include _partial/header.html %}
-  </header>
-  <div id="container">
-    {% include _partial/search.html %}
-  </div>
-  <footer>{% include _partial/footer.html %}</footer>
-  {% include _partial/after_footer.html %}
+    <header>
+        {% include _partial/header.html %}
+    </header>
+    <div id="container">
+        {% include _partial/search.html %}
+    </div>
+    <footer>{% include _partial/footer.html %}</footer>
+    {% include _partial/after_footer.html %}
 </body>
 
 </html>
 {% elsif page.layout == 'categories' or page.layout == 'tags' or page.layout == 'archives' %}
 {% include _partial/head.html %}
-
 <!-- Archives页面 -->
+
 <body>
-  <header>
-    {% include _partial/header.html %}
-  </header>
-  <div id="container">
-    {{ content }}
-  </div>
-  <footer>{% include _partial/footer.html %}</footer>
-  {% include _partial/after_footer.html %}
+    <header>
+        {% include _partial/header.html %}
+    </header>
+    <div id="container">
+        {{ content }}
+    </div>
+    <footer>{% include _partial/footer.html %}</footer>
+    {% include _partial/after_footer.html %}
 </body>
+
 </html>
 {% else %}
 {% include _partial/head.html %}
-
 <!-- 主页面 -->
+
 <body>
-  <header>
-    {% include _partial/header.html %}
-  </header>
-  <div id="container">
-    {{ content }}
-    {% assign item = page %}
-    {% assign table = false %}
-    {% include _partial/sidebar.html %}
-  </div>
-  <footer>{% include _partial/footer.html %}</footer>
-  {% include _partial/after_footer.html %}
+    <header>
+        {% include _partial/header.html %}
+    </header>
+    <div id="container">
+        {{ content }}
+        {% assign item = page %}
+        {% assign table = false %}
+        {% include _partial/sidebar.html %}
+    </div>
+    <footer>{% include _partial/footer.html %}</footer>
+    {% include _partial/after_footer.html %}
 </body>
 
 </html>
