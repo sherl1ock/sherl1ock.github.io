@@ -4,17 +4,3 @@ layout: default
 
 {% assign lang = site.data.languages[site.language] %}
 {% include post.html %}
-  <div id="gitmentContainer"></div>
-  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-  <script>
-    var gitment = new Gitment({
-      owner: sherl1ock,
-      repo: 'https://github.com/sherl1ock/sherl1ock.github.io',
-      oauth: {
-        client_id: '0694b07596fd4d64a889',
-        client_secret: '55a6408d1902b89827365d5a56a528e9de4c19bc',
-      },
-    });
-    gitment.render('gitmentContainer');
-  </script>

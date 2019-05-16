@@ -2,6 +2,7 @@
 {% include _partial/head.html %}
 
 <body>
+
   <header>
     {% include _partial/header.html %}
   </header>
@@ -11,6 +12,22 @@
     {% assign table = true %}
     {% include _partial/sidebar.html %}
   </div>
+  <div id="gitmentContainer">
+      <h1>无情铁手1</h1>
+    </div>
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+  <script>
+    var gitment = new Gitment({
+      owner: sherl1ock,
+      repo: 'https://github.com/sherl1ock/sherl1ock.github.io',
+      oauth: {
+        client_id: '0694b07596fd4d64a889',
+        client_secret: '55a6408d1902b89827365d5a56a528e9de4c19bc',
+      },
+    });
+    gitment.render('gitmentContainer');
+  </script>
   <footer>{% include _partial/footer.html %}</footer>
   {% include _partial/after_footer.html %}
 </body>
