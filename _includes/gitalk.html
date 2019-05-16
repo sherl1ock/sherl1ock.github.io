@@ -1,18 +1,18 @@
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <div id="gitalk-container">
-	<h3>2323</h3>
+    <h3>2323</h3>
 </div>
 <script>
 var gitalk = new Gitalk({
-    clientID: '616faabaa3b921c0f37f',
-    clientSecret: '6993337d84f81fe477ab6db42c204d2b51c10dca',
-    repo: 'sherl1ock.github.io',
-    owner: 'sherl1ock',
-    admin: ['Mr Huang'],
-    id: location.pathname, // Ensure uniqueness and length less than 50
-    distractionFreeMode: true // Facebook-like distraction free mode
+    clientID: '{{ site.comments.gitalk_clientID }}',
+    clientSecret: '{{ site.comments.gitalk_Secret }}',
+    repo: '{{ site.comments.gitalk_repo }}',
+    owner: '{{ site.comments.gitalk_owner }}',
+    admin: '{{ site.comments.gitalk_admin }}',
+    id: location.pathname, // Ensure uniqueness and length less than 50{{ page.title }}
+    distractionFreeMode: false // Facebook-like distraction free mode
 })
 
-gitalk.render('gitalk-container')
+gitalk.render('disqus_thread')
 </script>

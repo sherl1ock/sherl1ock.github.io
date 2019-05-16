@@ -126,6 +126,14 @@ yungentie_productkey: ## your netease yungentie product key.              websit
 #   repo: 'sherl1ock.github.io'
 #   owner: 'sherl1ock'
 #   admin: ['Mr Huang']
+comments:
+  gitalk: true
+  gitalk_clientID: '616faabaa3b921c0f37f'
+  gitalk_Secret: '6993337d84f81fe477ab6db42c204d2b51c10dca'
+  gitalk_repo: 'sherl1ock.github.io'
+  gitalk_owner: 'sherl1ock'
+  gitalk_admin: 'sherl1ock'
+  distractionFreeMode: true
 ## set only one of them
 ## duoshuo will be shutting down on June 1, 2017
 
