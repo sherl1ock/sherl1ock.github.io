@@ -13,6 +13,8 @@ date: 2019-5-15 15:06
 
 ### 所运用到Bootstrap的知识点
 
+
+
 ## 1. 栅格布局
 
 ![](/blogimg/Bootstrap/pc1.png)
@@ -69,6 +71,8 @@ date: 2019-5-15 15:06
 
 > 小屏幕向大屏幕适配（即如果小屏幕的布局、样式与大屏幕一致则只需设置小屏幕的样式）
 
+
+
 ## 3.轮播图（焦点图）不同设备图片的处理
 
 *思想：在真实开发的过程中一般有两套图片。在中等、大屏幕的设备上采用背景图来设置，原因是在浏览器不断拉伸的过程中图片的内容要始终在`可视区域`中间（图片两边一般是留白区域），则设置背景图的`css`样式的`background-position:center`来解决。小设备则可以直接用`img`标签引进另外一套图片让其100%显示在设备上*
@@ -118,6 +122,8 @@ js:
     })
 ```
 
+
+
 ## 4.文字
 
 **情镜文本颜色**
@@ -145,6 +151,8 @@ js:
 通过为 `<img>` 元素添加以下相应的类，可以让图片呈现不同的形状。
 
 ![](/blogimg/Bootstrap/pc6.png)
+
+
 
 ## 6.按钮
 
@@ -204,7 +212,7 @@ js:
 
 
 
-## 9.选项卡(标签页)
+## 7.选项卡(标签页)
 
 ![](/blogimg/Bootstrap/pc12.png)
 
@@ -244,6 +252,8 @@ js:
 </div>
 ```
 
+
+
 ## 8.徽章
 
 给链接、导航等元素嵌套 `<span class="badge">` 元素，可以很醒目的展示新的或未读的信息条目。
@@ -265,6 +275,8 @@ js:
 ```html
 <div class="badge" style="padding:15px;">已更新3000+视频 | 100000+人订阅</div>
 ```
+
+
 
 ## 9.导航条
 
@@ -331,6 +343,8 @@ body { padding-top: 70px; }
 
 通过添加 `.navbar-inverse` 类可以改变导航条的外观。
 
+
+
 ## 10.媒体
 
 ![](/blogimg/Bootstrap/pc15.png)
@@ -374,6 +388,8 @@ body { padding-top: 70px; }
 </ul>
 ```
 
+
+
 ## 11.提示框
 
 在标签上添加`data-toggle="tooltip" data-placement="显示的方向" title="显示的内容"`
@@ -404,6 +420,8 @@ $(function () {
 
 **[链接](http://blog.koalite.com/bbg/)**
 
+
+
 ## 13.路径导航
 
 ![](/blogimg/Bootstrap/pc20.png)
@@ -416,6 +434,8 @@ $(function () {
 </ol>
 ```
 
+
+
 ## 14. 快速浮动
 
 通过添加一个类，可以将任意元素向左或向右浮动。`!important` 被用来明确 CSS 样式的优先级。
@@ -423,6 +443,8 @@ $(function () {
 >**不能用于导航条组件中**
 >
 >排列导航条中的组件时可以使用这些工具类：`.navbar-left` 或 `.navbar-right` 。 [参见导航条文档](https://v3.bootcss.com/components/#navbar-component-alignment)以获取更多信息。
+
+
 
 ### 踩到过的坑
 
@@ -438,7 +460,11 @@ $(function () {
 
 原因：将包裹导航条的div`设死了高度`导致缩小到小设备屏幕的宽度时弹出的列表溢出显示导致样式崩塌
 
-## to be continued
+
+
+## to be continued...
+
+
 
 ### 收获到的知识点
 
@@ -453,6 +479,8 @@ $(function () {
 }
 //子元素无需设置
 ```
+
+
 
 ## 2.更深刻的理解vertical-align
 
