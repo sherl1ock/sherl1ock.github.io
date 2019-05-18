@@ -1,8 +1,6 @@
 ---
 layout: post
 title: Bootstrap项目实战(聪哥学院)
-tags: 
-- BootstrapDemo
 categories: Demo
 date: 2019-5-15 15:06
 ---
