@@ -25,7 +25,8 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   {% for tag in item.tags %}
-  <a href="{{ site.baseurl }}/tags/#{{ tag }}">{{ tag }}</a>
+  <!-- <a href="{{ site.baseurl }}/tags/#{{ tag }}">{{ tag }}</a> -->
+  <a>{{ tag }}</a>
   {% endfor %}
   </div>
 {% endif %}
