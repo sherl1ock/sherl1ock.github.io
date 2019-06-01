@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>百度搜索</title>
+	<style>
+		*{padding: 0;margin: 0;}
+		.wrap{
+			position: relative;
+			width: 600px;
+			height: 40px;
+			margin:  50px auto;
+			border: 1px solid #aaa;
+		}
+		.text input{
+			width: 100%;
+			padding: 0 5px;
+			height: 40px;
+			line-height: 40px;
+			border: 0;
+			font-size: 18px;
+			box-sizing: border-box;
+		}
+		#list{
+			display: none;
+			position: absolute;
+			width: 100%;
+			border: 1px solid #ccc;
+			border-top: 0;
+			top: 41px;
+			left: -1px;
+		}
+		#list li{
+			list-style: none;
+			height: 30px;
+			line-height: 30px;
+			color: #333;
+			font-weight: 600;
+			padding-left: 5px;
+			cursor: default;
+		}
+		#list li:hover{
+			background-color: rgba(200, 200, 200, 0.5);
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="text">
+			<input type="text" id="input" autofocus>
+		</div>
+		<ul id="list">
+			<!-- <li>aaa</li> -->
+		</ul>
+	</div>
+
+	<script>
+		const ipt = document.getElementById('input');
+		const list = document.getElementById('list');
+		let arr = [];
+
+		function getValue(obj){
+			let str = '';
+			list.style.display = 'block';
+			arr = obj.s;
+			arr.forEach(v => {
+				str += `<li>${v}</li>`;
+			});
+			list.innerHTML = str;
+		}
+
+		ipt.addEventListener('keyup', function(){
+			let val = this.value.trim();
+			if(val === '') {
+				list.style.display = 'none';
+				return;
+			}
+			let src = `https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${val}&cb=getValue`
+			let script = document.createElement('script');
+			script.src = src;
+			document.body.appendChild(script);
+		})
+
+		list.addEventListener('click', e => {
+			e.stopPropagation();
+			let that = e.target;
+			arr.forEach((v, i) => {
+				if(that === list.children[i]){
+					let src = `https://www.baidu.com/s?wd=${that.innerText.trim()}`
+					open(src);	
+					ipt.value = '';
+					list.innerHTML = '';
+					list.style.display = 'none';
+				}
+			})
+
+		})
+	</script>
+</body>
+</html>
