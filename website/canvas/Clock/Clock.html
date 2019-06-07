@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            height: 100%;
+        }
+
+        canvas {
+            display: block;
+            margin: 50px auto;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width='600' height='400'>
+        您的浏览器暂时不支持该功能，建议换一个浏览器
+    </canvas>
+
+    <script>
+        (function () {
+            let canvas = document.querySelector('canvas')
+
+            // 判断是否有画笔
+            if (canvas.getContext) {
+                let ctx = canvas.getContext('2d')
+                setInterval(move, 1000)
+                function move() {
+
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+                    ctx.save()
+                    // 全局样式
+                    // 改变画布圆心
+                    ctx.translate(300, 200)
+
+                    ctx.rotate(-90 * Math.PI / 180)
+
+                    // 圆盘
+                    ctx.save()
+                    ctx.beginPath()
+                    ctx.arc(0, 0, 100, 0, 360 * Math.PI / 180)
+                    ctx.stroke()
+                    ctx.restore()
+
+                    // 表盘
+                    ctx.beginPath()
+                    ctx.lineWidth = '5'
+                    ctx.save()
+                    for (let i = 0; i < 12; i++) {
+                        // 利用了圆心会累加的特性实现
+                        ctx.rotate(30 * Math.PI / 180)
+                        ctx.moveTo(75, 0)
+                        ctx.lineTo(90, 0)
+                        ctx.stroke()
+                    }
+                    ctx.restore()
+
+                    // 刻度
+                    ctx.save()
+                    ctx.lineWidth = '1'
+                    ctx.beginPath()
+                    for (let i = 0; i < 60; i++) {
+                        // 利用了圆心会累加的特性实现
+                        if (i % 5 == 0) {
+                            ctx.rotate(6 * Math.PI / 180)
+                            continue
+                        }
+                        ctx.moveTo(85, 0)
+                        ctx.lineTo(90, 0)
+                        ctx.stroke()
+                        ctx.rotate(6 * Math.PI / 180)
+                    }
+                    ctx.restore()
+
+                    let date = new Date()
+                    let second = date.getSeconds()
+                    let minute = date.getMinutes()
+                    let hour = date.getHours()
+                    hour = hour > 12 ? hour - 12 : hour
+
+                    // 分针
+                    ctx.save()
+                    ctx.lineCap = 'round'
+                    ctx.lineWidth = '4';
+                    ctx.rotate(6 * minute * Math.PI / 180)
+                    ctx.beginPath()
+                    ctx.moveTo(0, 0)
+                    ctx.lineTo(75, 0)
+                    ctx.stroke()
+                    ctx.restore()
+
+                    // 时针
+                    ctx.save()
+                    ctx.lineWidth = '5'
+                    ctx.lineCap = 'round'
+                    ctx.rotate((minute / 60 + hour) * 30 * Math.PI / 180)
+                    ctx.beginPath()
+                    ctx.moveTo(0, 0)
+                    ctx.lineTo(60, 0)
+                    ctx.stroke()
+                    ctx.restore()
+
+                    //秒针
+                    ctx.save()
+                    ctx.fillStyle = 'red'
+                    ctx.strokeStyle = 'red'
+                    ctx.lineCap = 'round'
+                    ctx.lineWidth = '3'
+                    ctx.rotate(second * 6 * Math.PI / 180)
+                    ctx.beginPath()
+                    ctx.arc(0, 0, 5, 0, 360 * Math.PI / 180)
+                    ctx.fill()
+                    ctx.beginPath()
+                    ctx.moveTo(-20, 0)
+                    ctx.lineTo(80, 0)
+                    ctx.moveTo(90, 0)
+                    ctx.arc(85, 0, 5, 0, 360 * Math.PI / 180)
+                    ctx.stroke()
+                    ctx.restore()
+
+                    ctx.restore()
+                }
+                move()
+            }
+
+
+        })()
+
+
+
+    </script>
+</body>
+
+</html>
