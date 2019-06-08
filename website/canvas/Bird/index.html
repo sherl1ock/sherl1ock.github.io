@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas height='300'>
+        您的浏览器暂时不支持该功能，请切换至谷歌浏览器
+    </canvas>
+
+    <script>
+        let canvas = document.querySelector('canvas')
+        canvas.width = document.documentElement.clientWidth
+        if (canvas.getContext) {
+            let ctx = canvas.getContext('2d')
+
+            let img = new Image()
+
+            let i = 1 //图片下标
+            let x = 0 //每次插入图片的X轴坐标
+            function move() {
+                img.src = `img/q_r${i}.jpg`
+                img.onload = function () {
+                    draw(img)
+                    i = i >= 8 ? 1 : i + 1
+                }
+
+            }
+
+            function draw(img) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+                ctx.drawImage(img, x, 0, img.width, img.height)
+                x += 20
+                x = x > canvas.width ? 0 : x;
+            }
+
+            setInterval(move, 1000 / 10)
+        }
+
+
+
+    </script>
+</body>
+
+</html>
