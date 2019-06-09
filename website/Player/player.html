@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义播放器</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <video
+            src="https://blz-videos.nosdn.127.net/1/OverWatch/AnimatedShots/Overwatch_AnimatedShot_Soldier76_Hero.mp4"></video>
+        <div id='control'>
+            <!-- 播放和暂停按钮 -->
+            <div class="button">
+                <span class="start"></span>
+                <span class="stop"></span>
+            </div>
+            <!-- 进度条 -->
+            <div class="progress">
+                <div class="bar">
+                    <!-- 可以拖拽的方块 -->
+                    <div class="btn"></div>
+                    <!-- 进度条完成的颜色 -->
+                    <div class="deeppink"></div>
+                </div>
+            </div>
+            <div class="right">
+                <!-- 时间 -->
+                <div class="time">
+                    <!--当前时间  -->
+                    <span class="currentTime">00:00:00</span>
+                    <!-- 总时长 -->/
+                    <span class="durationTime">00:00:00</span>
+                </div>
+                <!-- 声音 -->
+                <div class="volume">
+                    <!-- 声音按钮 -->
+                    <div class="musicIcon"></div>
+                    <!-- 音量条 -->
+                    <div class="progress">
+                        <div class="bar">
+                            <!-- 可以拖拽的方块 -->
+                            <div class="btn"></div>
+                            <!-- 进度条完成的颜色 -->
+                            <div class="deeppink"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 全屏按钮 -->
+                <div class="fullScreen">
+                    <span class="full"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class='isplay'>Play</div>
+    </div>
+    <script src="js/drag.js"></script>
+    <script>
+        let vi = document.querySelector('video')
+        let ctr = document.querySelector('#control')
+        let bar = document.querySelector('#control>.progress')
+
+        let btn = document.querySelector('#control>.progress>.bar>.btn')
+        let deeppink = document.querySelector('#control>.progress>.bar>.deeppink')
+
+        let musicIcon = document.querySelector('#control>.right>.volume>.musicIcon')
+        let btn1 = document.querySelector('#control>.right>.volume>.progress .btn')
+        let deeppink1 = document.querySelector('#control>.right>.volume>.progress .deeppink')
+
+        let playBtn = document.querySelector('#control>.button>.start')
+        let resetBtn = document.querySelector('#control>.button>.stop')
+
+        let curTime = document.querySelector('#control>.right>.time>.currentTime')
+        let durTime = document.querySelector('#control>.right>.time>.durationTime')
+
+        let fullScreen = document.querySelector('#control>.right>.fullScreen')
+
+        let isplay = document.querySelector('#wrap>.isplay')
+
+        vi.height = document.documentElement.clientHeight - ctr.offsetHeight
+        vi.width = document.documentElement.clientWidth
+
+
+        window.onresize = function () {
+            vi.height = document.documentElement.clientHeight - ctr.offsetHeight
+            vi.width = document.documentElement.clientWidth
+        }
+
+        play()
+
+        // 播放
+        function play() {
+            let timer = null
+            $.addClass(isplay, 'active')
+
+            // 监听音频是否加载完（第一帧）
+            vi.addEventListener('loadeddata', function () {
+                // 如果不在这里拿到vi.duration 而放在外面拿 ，可能会造成video标签未加载完成导致拿到的数据是NaN
+                durTime.innerHTML = $.fixTime(vi.duration)
+            })
+
+            // 监听音频是否播放完毕
+            vi.addEventListener('ended', function () {
+                console.log(11)
+                curTime.innerHTML = durTime.innerHTML
+                clearInterval(timer)
+            })
+
+
+            // 初始化音量条样式
+            deeppink1.style.width = btn1.style.left = btn1.offsetParent.clientWidth - btn1.clientWidth + 'px'
+
+            // 音量图片按钮点击事件
+            let calc = 0;
+            let flag = 0;
+            musicIcon.onclick = function () {
+                if (!flag) {
+
+                    calc = btn1.offsetLeft / (btn1.offsetParent.clientWidth - btn1.clientWidth)
+                    flag = 1
+                }
+
+                if (calc <= 0) {
+                    calc = 1
+                }
+
+                if (vi.muted) {//静音 =》 不静音
+
+                    this.classList.remove('active')
+                    vi.muted = false
+                    deeppink1.style.width = btn1.style.left = (btn1.offsetParent.clientWidth - btn1.clientWidth) * calc + 'px'
+                } else {//不静音 = 静音
+
+                    calc = btn1.offsetLeft / (btn1.offsetParent.clientWidth - btn1.clientWidth)
+
+                    $.addClass(this, 'active')
+                    vi.muted = true
+                    vi.volume = 0
+                    deeppink1.style.width = btn1.style.left = 0 + 'px'
+
+                }
+
+
+
+            }
+
+            // 开始、暂停按钮点击事件
+            playBtn.onclick = function (e) {
+                e = e || window.event
+                e.preventDefault()
+                if (vi.paused) { //判断是否暂停
+                    vi.play()
+                    isplay.classList.remove('active')
+                    $.addClass(playBtn, 'pause')
+                    timer = setInterval(progressMove, 1000)
+                } else {
+                    $.addClass(isplay, 'active')
+                    clearInterval(timer)
+                    vi.pause()
+                    playBtn.classList.remove('pause')
+                }
+            }
+
+            //视频点击事件
+            vi.onclick = function (e) {
+                e = e || window.event
+                e.preventDefault()
+                if (vi.paused) { //判断是否暂停
+                    vi.play()
+
+                    isplay.classList.remove('active')
+                    $.addClass(playBtn, 'pause')
+                    timer = setInterval(progressMove, 1000)
+                } else {
+                    $.addClass(isplay, 'active')
+                    clearInterval(timer)
+                    vi.pause()
+                    playBtn.classList.remove('pause')
+                }
+            }
+
+            isplay.onclick = function (e) {
+                e = e || window.event
+                e.preventDefault()
+                if (vi.paused) { //判断是否暂停
+                    vi.play()
+                    $.addClass(playBtn, 'pause')
+                    this.classList.remove('active')
+                    timer = setInterval(progressMove, 1000)
+                } else {
+
+                    clearInterval(timer)
+                    vi.pause()
+                    playBtn.classList.remove('pause')
+                    $.addClass(isplay, 'active')
+                }
+            }
+
+
+            //全屏点击事件
+            let isFullScreen = false;
+            fullScreen.onclick = function () {
+                if (isFullScreen) {
+                    isFullScreen = false
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                    else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    }
+                    else if (document.webkitCancelFullScreen) {
+                        document.webkitCancelFullScreen();
+                    }
+                    else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                } else {
+                    isFullScreen = true
+                    var docElm = document.documentElement;
+                    //W3C  
+                    if (docElm.requestFullscreen) {
+                        docElm.requestFullscreen();
+                    }
+                    //FireFox  
+                    else if (docElm.mozRequestFullScreen) {
+                        docElm.mozRequestFullScreen();
+                    }
+                    //Chrome等  
+                    else if (docElm.webkitRequestFullScreen) {
+                        docElm.webkitRequestFullScreen();
+                    }
+                    //IE11
+                    else if (docElm.msRequestFullscreen) {
+                        docElm.msRequestFullscreen();
+                    }
+                }
+            }
+
+            function progressMove() {
+                // 播放时进度条的移动事件
+                btn.style.left = (btn.offsetParent.clientWidth - btn.clientWidth) * (vi.currentTime / vi.duration) + 'px'
+                deeppink.style.width = btn.style.left
+
+                //播放时时间相应做出相应的变化
+                curTime.innerHTML = $.fixTime(vi.currentTime)
+            }
+
+            // 点击滚动条到指定的区域播放
+            bar.onclick = function (e) {
+                if (vi.paused) {
+                    vi.play()
+                    $.addClass(playBtn, 'pause')
+                    timer = setInterval(progressMove, 100)
+                }
+                e = e || window.event;
+                e.preventDefault()
+                downX = e.clientX - this.offsetLeft;
+                // 修改到点击的播放时间
+                vi.currentTime = vi.duration * (downX / (this.clientWidth - btn.clientWidth))
+            }
+
+            // 重置按钮点击事件
+            resetBtn.onclick = function (e) {
+                e = e || window.event;
+                if (!vi.paused) {
+                    clearInterval(timer)
+                }
+                $.addClass(isplay, 'active')
+                vi.pause()
+                playBtn.classList.remove('pause')
+                vi.currentTime = 0
+                btn.style.left = 0 + 'px'
+                deeppink.style.width = 0 + 'px'
+                curTime.innerHTML = $.fixTime(vi.currentTime)
+
+            }
+
+
+            //拖拽混动条事件
+            let callback = {
+                move() {
+                    deeppink.style.width = this.style.left;
+                    vi.currentTime = vi.duration * (this.offsetLeft / (this.offsetParent.clientWidth - this.clientWidth))
+                }
+            }
+
+            let callback1 = {
+                move() {
+                    deeppink1.style.width = this.style.left;
+                    let calc = this.offsetLeft / (this.offsetParent.clientWidth - this.clientWidth)
+                    if (calc <= 0) {
+                        $.addClass(musicIcon, 'active')
+                        vi.muted = true
+
+                    } else {
+                        musicIcon.classList.remove('active')
+                        vi.muted = false
+                        flag = 0
+                    }
+
+                    vi.volume = calc
+
+                }
+            }
+
+
+            $.drag(btn, callback)
+
+            $.drag(btn1, callback1)
+
+        }
+
+    </script>
+</body>
+
+</html>
+<!-- https://blz-videos.nosdn.127.net/1/OverWatch/AnimatedShots/Overwatch_AnimatedShot_Soldier76_Hero.mp4 -->
