@@ -188,11 +188,11 @@ body {
 }
 #wrap #control > .button .start {
   margin-right: 7px;
-  background-image: url(/img/icon.png);
+  background-image: url(../img/icon.png);
   background-position: 0px -23px;
 }
 #wrap #control > .button .stop {
-  background-image: url(/img/icon.png);
+  background-image: url(../img/icon.png);
   background-position: 0px 0px;
 }
 #wrap #control > .button > span.pause {
@@ -253,7 +253,7 @@ body {
   margin: 5px auto;
   width: 11px;
   height: 12px;
-  background-Image: url(/img/icon.png);
+  background-Image: url(../img/icon.png);
   background-position: 0px -34px;
 }
 #wrap #control > .right .volume .musicIcon.active {
@@ -297,7 +297,7 @@ body {
   width: 11px;
   height: 11px;
   margin: 5px 0 0 5px;
-  background-image: url(/img/icon.png);
+  background-image: url(../img/icon.png);
   background-position: 0 -58px;
 }
 #wrap > .isplay {
