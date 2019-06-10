@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Vue-Music(day04)
-categories: [Vue,Demo]
+categories: Demo
 tags: 
 - day04
 date: 2019-6-4
